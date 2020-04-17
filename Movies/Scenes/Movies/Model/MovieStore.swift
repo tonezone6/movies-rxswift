@@ -21,20 +21,40 @@ final class MovieStore {
     init(webservice: Webservice) {
         self.webservice = webservice
         
-        movies.bind(to: filteredSubject)
+        movies
+            .bind(to: filteredSubject) // To return tapped movie.
             .disposed(by: disposeBag)
     }
+}
+
+extension MovieStore {
+    var query:       Query?             { querySubject.value }
+    var failure:     Observable<Error?> { failureSubject.asObservable() }
     
+    var queryActive: Observable<Bool> {
+        querySubject.map { $0?.active ?? false }
+    }
+    
+    var movies: Observable<[Movie]> {
+        Observable.combineLatest(querySubject, moviesSubject) { [unowned self] query, movies in
+            self.perform(query, with: movies)
+        }
+    }
+}
+
+extension MovieStore {
     func fetch() {
         webservice
             .fetchMovies()
             .observeOn(MainScheduler.instance)
-            .catchError { [unowned self] error in
-                self.failureSubject.accept(error)
-                return .just([])
-            }
-            .do(onNext: { [unowned self] _ in self.resetQuery() })
-            .bind(to: moviesSubject)
+            .subscribe(
+                onNext: { [unowned self] movies in
+                    self.resetQuery()
+                    self.moviesSubject.onNext(movies)
+                },
+                onError: { [unowned self] error in
+                    self.failureSubject.accept(error)
+                })
             .disposed(by: disposeBag)
     }
     
@@ -48,17 +68,5 @@ final class MovieStore {
     
     func movie(at position: Int) -> Movie {
         filteredSubject.value[position]
-    }
-}
-
-extension MovieStore {
-    var query:       Query?              { querySubject.value }
-    var queryActive: Observable<Bool>    { querySubject.map { $0?.active ?? false } }
-    var failure:     Observable<Error?>  { failureSubject.asObservable() }
-    
-    var movies: Observable<[Movie]> {
-        Observable.combineLatest(querySubject, moviesSubject) { [unowned self] query, movies in
-            self.perform(query, with: movies)
-        }
     }
 }

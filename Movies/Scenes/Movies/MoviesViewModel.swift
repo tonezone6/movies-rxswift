@@ -23,12 +23,16 @@ final class MoviesViewModel {
     }
     
     func fetch(refresh: Bool = false) {
-        refresh ? refreshSubject.accept(true) : loadingSubject.accept(true)
+        refresh ?
+            refreshSubject.accept(true) :
+            loadingSubject.accept(true)
             
         store.fetch()
         store.movies
             .subscribe(onNext: { [unowned self] _ in
-                refresh ? self.refreshSubject.accept(false) : self.loadingSubject.accept(false) })
+                refresh ?
+                    self.refreshSubject.accept(false) :
+                    self.loadingSubject.accept(false) })
             .disposed(by: disposeBag)
     }
 }
