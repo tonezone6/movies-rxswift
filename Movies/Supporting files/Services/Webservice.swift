@@ -9,18 +9,34 @@
 import Foundation
 import RxSwift
 
+protocol URLSessionProtocol { /* Define for testing. */ }
+extension URLSession: URLSessionProtocol {}
+
 struct Webservice {
+    private var session: URLSessionProtocol
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
+        self.session = session
+    }
+    
     func fetchMovies() -> Observable<[Movie]> {
-        Observable.create { subscriber in
-            DispatchQueue.global().async {
-                Thread.sleep(forTimeInterval: 1.5)
-                                
-                // let error = URLError.init(.badServerResponse)
-                // subscriber.onError(error)
-                
-                subscriber.onNext(Movie.data)
-                // subscriber.onNext([])
-            }
+        let url = URL(string: "https://tar-movies.glitch.me/movies")!
+        
+        return Observable.create { subscriber in
+            URLSession.shared.dataTask(with: url) { (data, _, error) in
+                if let error = error {
+                    subscriber.onError(error)
+                }
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        subscriber.onNext(try decoder.decode([Movie].self, from: data))
+                    } catch(let error) {
+                        subscriber.onError(error)
+                    }
+                }
+            }.resume()
+
             return Disposables.create()
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieCell: UITableViewCell {
     static let reuseID = "MovieCell"
@@ -24,10 +25,14 @@ class MovieCell: UITableViewCell {
     }
 
     func configure(with movie: Movie) {
-        thumbnailView.image = UIImage(named: "img-\(movie.id)")
         titleLabel.text = movie.title
         subtitleLabel.text = "\(movie.year)"
         ratingLabel.text = "\(movie.rating)"
+        
+        thumbnailView.kf.setImage(
+            with: URL(string: movie.thumbnail),
+            options: [.transition(.fade(0.5)) ]
+        )
     }
     
     private func configureSubviews() {
@@ -67,7 +72,7 @@ class MovieCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = UIColor(white: 220/255, alpha: 1.0)
         imageView.widthAnchor.constraint(
             equalTo: imageView.heightAnchor, multiplier: 0.7).isActive = true
         return imageView

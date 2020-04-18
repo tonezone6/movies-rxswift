@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Kingfisher",
+        "repositoryURL": "git@github.com:onevcat/Kingfisher.git",
+        "state": {
+          "branch": "master",
+          "revision": "0abe23a6b7909b011eb6e4cee85d509db768f41a",
+          "version": null
+        }
+      },
+      {
         "package": "RxSwift",
         "repositoryURL": "git@github.com:ReactiveX/RxSwift.git",
         "state": {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA28D960244746BE00B9D7FE /* MovieStore+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28D95F244746BE00B9D7FE /* MovieStore+Query.swift */; };
+		FA64AA6B244AFF5400CB3978 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FA64AA6A244AFF5400CB3978 /* Kingfisher */; };
 		FA911C0A24446149008E8B7B /* QueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA911C0824446149008E8B7B /* QueryViewController.swift */; };
 		FA911C0B24446149008E8B7B /* QueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA911C0924446149008E8B7B /* QueryViewController.xib */; };
 		FA911C0D24446EA0008E8B7B /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA911C0C24446EA0008E8B7B /* RoundedView.swift */; };
@@ -89,6 +90,7 @@
 				FABE5B362441D7D10094C8A7 /* RxCocoa in Frameworks */,
 				FABE5B342441D7D10094C8A7 /* RxSwift in Frameworks */,
 				FABE5B322441D7D10094C8A7 /* RxRelay in Frameworks */,
+				FA64AA6B244AFF5400CB3978 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +277,7 @@
 				FABE5B332441D7D10094C8A7 /* RxSwift */,
 				FABE5B352441D7D10094C8A7 /* RxCocoa */,
 				FAF629F92441EDB500CE41B2 /* SwiftHelpers */,
+				FA64AA6A244AFF5400CB3978 /* Kingfisher */,
 			);
 			productName = StoreLayer;
 			productReference = FABE5B092441C84B0094C8A7 /* Movies.app */;
@@ -307,6 +310,7 @@
 			packageReferences = (
 				FABE5B302441D7D10094C8A7 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				FAF629F82441EDB500CE41B2 /* XCRemoteSwiftPackageReference "SwiftHelpers" */,
+				FA64AA69244AFF5400CB3978 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = FABE5B0A2441C84B0094C8A7 /* Products */;
 			projectDirPath = "";
@@ -554,6 +558,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FA64AA69244AFF5400CB3978 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		FABE5B302441D7D10094C8A7 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:ReactiveX/RxSwift.git";
@@ -573,6 +585,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA64AA6A244AFF5400CB3978 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA64AA69244AFF5400CB3978 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		FABE5B312441D7D10094C8A7 /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FABE5B302441D7D10094C8A7 /* XCRemoteSwiftPackageReference "RxSwift" */;

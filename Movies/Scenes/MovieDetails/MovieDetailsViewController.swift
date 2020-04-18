@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MovieDetailsViewController: UIViewController {
-    private var poster: UIImageView
+    private var imageView = UIImageView()
 
     init(movie: Movie) {
-        poster = UIImageView(image: UIImage(named: "img-\(movie.id)"))
-        poster.backgroundColor = .white
-        poster.contentMode = .scaleAspectFit
-        
+        imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFit
+        imageView.kf.setImage(
+            with: URL(string: movie.image),
+            options: [.transition(.fade(0.5)) ]
+        )
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,6 +27,6 @@ final class MovieDetailsViewController: UIViewController {
     }
     
     override func loadView() {
-        view = poster
+        view = imageView
     }
 }
