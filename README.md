@@ -1,4 +1,4 @@
-### Swift reactive example using MVVM-C architecture and RxSwift.
+Swift reactive example using MVVM-C and RxSwift.
 
 Data hosted on [Glitch.com](https://glitch.com/~tar-movies)
 
